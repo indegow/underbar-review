@@ -112,21 +112,21 @@
   // return resultArray
   
     var newArray = array;
+
     if (iterator) {
-      newArray = _.each(array, iterator);
+      newArray = [];
+      _.each(array, function(element) { 
+        newArray.push(iterator(element));
+      });
+      
     }
-    var resultArray = [];
-    var checkArray = [];
+
+    var resultArray = [array[0]];
+    var workingArray = [newArray[0]];
     for (var i = 0; i < newArray.length; i++) {
-      for (var j = 0; j < checkArray.length; j++) {
-        var isPresent = 0;
-        if (newArray[i] === checkArray[j]) {
-          isPresent = 1;
-        }
-      }
-      if (isPresent === 0) {
-        checkArray.push(newArray[i]);
-        resultArray.push(array[i]); 
+      if (_.indexOf(workingArray, newArray[i]) === -1) {
+        workingArray.push(newArray[i]);
+        resultArray.push(array[i]);
       }
     }
     return resultArray;
