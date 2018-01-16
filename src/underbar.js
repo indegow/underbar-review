@@ -93,13 +93,43 @@
   _.reject = function(collection, test) {
     // TIP: see if you can re-use _.filter() here, without simply
     // copying code in and modifying it
-    _.filter(collection, function() {
-      
+    return _.filter(collection, function(element) {
+      return !test(element);
     });
+
   };
 
   // Produce a duplicate-free version of the array.
   _.uniq = function(array, isSorted, iterator) {
+
+  // covert the array with the iterator - newArray
+  // create a resultArray
+  // create a checkArray
+  // iterate over newArray
+    // check to see if each element is in checkArray
+    // if no -  push array[element] to resultArray
+    // if no -  push newArray[element] to checkArray
+  // return resultArray
+  
+    var newArray = array;
+    if (iterator) {
+      newArray = _.each(array, iterator);
+    }
+    var resultArray = [];
+    var checkArray = [];
+    for (var i = 0; i < newArray.length; i++) {
+      for (var j = 0; j < checkArray.length; j++) {
+        var isPresent = 0;
+        if (newArray[i] === checkArray[j]) {
+          isPresent = 1;
+        }
+      }
+      if (isPresent === 0) {
+        checkArray.push(newArray[i]);
+        resultArray.push(array[i]); 
+      }
+    }
+    return resultArray;
   };
 
 
