@@ -191,7 +191,7 @@
     var accum = accumulator;
     if (accumulator === undefined) { 
       accum = collection[0]; 
-      newCollection = newCollection.slice(0, 1);
+      newCollection = newCollection.slice(1);
     }
     _.each(newCollection, function(element) {
       accum = iterator(accum, element);
@@ -215,6 +215,16 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    // find if any element in the colection is false
+    // iterate over every element - test iterator
+    // if false return false
+    // else return true
+    
+    return _.reduce(collection, function(a, b) {
+      if (iterator === undefined && a && b) { return true; }
+      if (iterator !== undefined && a && iterator(b)) { return true; }
+      return false;
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
