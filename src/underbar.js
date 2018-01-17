@@ -187,15 +187,15 @@
 
   // input: collection, function, start point 
   // output: one ~value - at any giving start po
+    var newCollection = collection;
     var accum = accumulator;
-    var i = 0;
-    if (!accumulator && accumulator !== 0) { 
+    if (accumulator === undefined) { 
       accum = collection[0]; 
-      i = 1;
+      newCollection = newCollection.slice(0, 1);
     }
-    for (i; i < collection.length; i++) {
-      accum = iterator(accum, collection[i]);
-    }
+    _.each(newCollection, function(element) {
+      accum = iterator(accum, element);
+    });
     return accum;
   };
 
